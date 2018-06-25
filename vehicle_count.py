@@ -1,6 +1,6 @@
 """
 
-Author: Yash Bansal / Rahul Ladda
+Author: Yash Bansal
 
 Vehicle Detection and counting using Image Processing
 
@@ -17,32 +17,8 @@ by thresholding and morphological operations.
 import numpy as np
 import cv2
 
-coords=[[5,51],[6,372],[485,58]]
-#coords=[[5,51][][][],[6,372][][][],[485,58][][][]]
 
 threshold = 600
-"""
-Helper function for calculating euclidean distance.
-"""
-def distance(x, y, type='euclidian', x_weight=1.0, y_weight=1.0):
-    if type == 'euclidian':
-        return math.sqrt(float((x[0] - y[0])**2) / x_weight + float((x[1] - y[1])**2) / y_weight)
-
-"""
-This function is calculating the centroid.
-This takes two arguments x,y (old centroid)
- and new points (w,h).
- Then take the avg of all these.
-"""
-
-def get_centroid(x, y, w, h):
-    x1 = int(w / 2)
-    y1 = int(h / 2)
-
-    cx = x + x1
-    cy = y + y1
-
-    return (cx, cy)
 
 """
 Opencv api reference:
@@ -102,13 +78,6 @@ ret, frame = cap.read()
 kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(4,4))
 kernel2 = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(20,20))
 
-np.zeros
-pts = np.asarray(coords, np.int32)
-#pts = np.asarray(coords, np.int32)
-#pts = pts.reshape((-1,1,2))
-#cv2.polylines(img,[pts],True,(0,255,255))
-#mask = np.full((frame.shape),255)
-#kernel = np.ones((3,3),np.uint8)
 fgbg = cv2.createBackgroundSubtractorMOG2()
 i=0
 
@@ -158,6 +127,5 @@ while(1):
         break
     i+=1
 
-#
 cap.release()
 cv2.destroyAllWindows()
